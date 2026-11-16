@@ -1163,7 +1163,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "kml-custom:031-5431-1010"
+		(symbol "KMLib_Connectors:031-5431-1010_BNC_Coaxial_Right_Angle"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1286,7 +1286,7 @@
 					(justify left top)
 				)
 			)
-			(symbol "031-5431-1010_1_1"
+			(symbol "031-5431-1010_BNC_Coaxial_Right_Angle_1_1"
 				(rectangle
 					(start 5.08 2.54)
 					(end 25.4 -5.08)
@@ -4298,7 +4298,7 @@
 		)
 	)
 	(symbol
-		(lib_id "kml-custom:031-5431-1010")
+		(lib_id "KMLib_Connectors:031-5431-1010_BNC_Coaxial_Right_Angle")
 		(at 87.63 71.12 180)
 		(unit 1)
 		(body_style 1)
