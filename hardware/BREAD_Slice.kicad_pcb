@@ -14673,6 +14673,25 @@
 		(uuid "d03508ee-94ce-461a-b711-1348ed4b5847")
 	)
 	(via
+		(at 156.15 79.85)
+		(size 0.8)
+		(drill 0.4)
+		(layers "F.Cu" "B.Cu")
+		(free yes)
+		(capping no)
+		(covering
+			(front no)
+			(back no)
+		)
+		(plugging
+			(front no)
+			(back no)
+		)
+		(filling no)
+		(net "GND")
+		(uuid "d0ee12cf-5868-4a8d-8ef0-b83cd1c1fbd4")
+	)
+	(via
 		(at 142.35 88.1)
 		(size 0.8)
 		(drill 0.4)
