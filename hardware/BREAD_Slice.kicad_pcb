@@ -10571,13 +10571,13 @@
 		)
 	)
 	(gr_text "12V->5V Reg"
-		(at 131.85 114.555 0)
+		(at 134.25 112.1 0)
 		(layer "B.SilkS")
 		(uuid "056806f2-56cf-4fe8-84b5-e588bde33964")
 		(effects
 			(font
-				(size 1 1)
-				(thickness 0.15)
+				(size 0.8 0.8)
+				(thickness 0.12)
 			)
 			(justify bottom mirror)
 		)
