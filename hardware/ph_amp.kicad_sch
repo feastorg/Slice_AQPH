@@ -3489,7 +3489,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2n"
+		(property "Value" "2.2n C0G"
 			(at 113.03 76.1999 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -3511,7 +3511,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://yageogroup.com/component-documentation/download/datasheet/C0805C222J5GACTU?lang=en"
 			(at 109.22 74.93 0)
 			(hide yes)
 			(show_name no)
@@ -3522,7 +3522,29 @@
 				)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "Capacitor, 2.2 nF 5 % 50 V C0G, 0805; IR >= 100 Gohm at 25 C"
+			(at 109.22 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer_Name" "KEMET"
+			(at 109.22 74.93 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Manufacturer_Part_Number" "C0805C222J5GACTU"
 			(at 109.22 74.93 0)
 			(hide yes)
 			(show_name no)

@@ -3683,7 +3683,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2n"
+		(property "Value" "2.2n C0G"
 			(at 80.01 106.68 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6064,7 +6064,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2n"
+		(property "Value" "2.2n C0G"
 			(at 80.01 182.88 0)
 			(show_name no)
 			(do_not_autoplace no)

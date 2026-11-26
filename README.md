@@ -36,6 +36,10 @@ temperature. U2's input current (10 pA typical, 50 pA maximum at 25 °C in
 the CA3140 data sheet) flows through the electrode's resistance: up to
 25 mV of offset at 500 MΩ, and it grows with temperature, as does the
 resistance of a cold electrode.
+C5 (2.2 nF across U2's input) is a C0G part, KEMET C0805C222J5GACTU, with
+an insulation resistance of at least 100 GΩ at 25 °C; with the electrode it
+forms a divider that reads 0.1 % low on a 100 MΩ electrode and 1 % low on
+1 GΩ, which the calibration takes out.
 Calibrate with two buffers (pH 7 and pH 4 or 10) at the working temperature,
 and correct the slope for temperature in firmware (0.198 mV/K per pH).
 
