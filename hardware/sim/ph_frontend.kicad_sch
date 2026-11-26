@@ -2594,7 +2594,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "max(EMF, -0.2 V)"
+		(property "Value" "max(EMF, -0.5 V)"
 			(at 29.21 170.18 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -2653,7 +2653,7 @@
 				(justify left)
 			)
 		)
-		(property "Sim.Params" "type=\"B\" model=\"v=max(v(/PROBE_EMF), -0.2)\" lib=\"\""
+		(property "Sim.Params" "type=\"B\" model=\"v=max(v(/PROBE_EMF), -0.5)\" lib=\"\""
 			(at 29.21 167.64 0)
 			(hide yes)
 			(show_name no)
@@ -4119,7 +4119,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2k"
+		(property "Value" "154k"
 			(at 123.19 93.98 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4178,7 +4178,7 @@
 				(justify left)
 			)
 		)
-		(property "Sim.Params" "r=2.2k"
+		(property "Sim.Params" "r=154k"
 			(at 123.19 91.44 0)
 			(hide yes)
 			(show_name no)
@@ -4462,7 +4462,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "49.9k"
 			(at 123.19 129.54 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -4521,7 +4521,7 @@
 				(justify left)
 			)
 		)
-		(property "Sim.Params" "r=1k"
+		(property "Sim.Params" "r=49.9k"
 			(at 123.19 127.00 0)
 			(hide yes)
 			(show_name no)
@@ -6500,7 +6500,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2k"
+		(property "Value" "154k"
 			(at 123.19 170.18 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6559,7 +6559,7 @@
 				(justify left)
 			)
 		)
-		(property "Sim.Params" "r=2.2k"
+		(property "Sim.Params" "r=154k"
 			(at 123.19 167.64 0)
 			(hide yes)
 			(show_name no)
@@ -6843,7 +6843,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "49.9k"
 			(at 123.19 205.74 0)
 			(show_name no)
 			(do_not_autoplace no)
@@ -6902,7 +6902,7 @@
 				(justify left)
 			)
 		)
-		(property "Sim.Params" "r=1k"
+		(property "Sim.Params" "r=49.9k"
 			(at 123.19 203.20 0)
 			(hide yes)
 			(show_name no)
@@ -8275,7 +8275,7 @@
 			)
 		)
 	)
-	(text "AQPH pH front-end test bench (simulation only; nothing here is on the board).\nMirrors hardware/ph_amp.kicad_sch: same refs and values for R1-R7, C5, C6, RV1, D2 (BAT54), U2 (CA3140), U4 (TL081HIDR).\nU2: CA3140 DATASHEET STAND-IN (models/ca3140_datasheet.lib), not a vendor model. U4: TI TL07xH/TL08xH model (SLOM513A).\nStimulus: V1 = +5V (ideal); V2 + R102 = the TPS60400 -5V rail (-5 V behind ~15 ohm, SLVS324C 8.3.1);\nV3 + R100 = the pH electrode: an EMF behind 100 Mohm, on the BNC centre (J2 SIGNAL).\nRV1 is fixed at mid-travel (pos=0.5: 2.5k each side, gain 2.343). The x200 copy (R201..U204, RV201) has RV201 at the R3 end (pos=0: gain 8.2, the maximum) and its own -5V (V4 + R103), so the two chains do not share the pump's droop; V5 floors its EMF at -0.2 V.\nFault circuit: V6 holds a copy of U4's output at -4.96 V (the -5V rail) into R107/D102, copies of R7/D2.\nU4_OUT reaches the Nano's A0 (PH_OUT, A1 pin 19) through R7 4.7k; D2 (BAT54, Nexperia model models/bat54.lib) clamps A0 to GND.\nChecks: expect.toml, run by check.py."
+	(text "AQPH pH front-end test bench (simulation only; nothing here is on the board).\nMirrors hardware/ph_amp.kicad_sch: same refs and values for R1-R7, C5, C6, RV1, D2 (BAT54), U2 (CA3140), U4 (TL081HIDR).\nU2: CA3140 DATASHEET STAND-IN (models/ca3140_datasheet.lib), not a vendor model. U4: TI TL07xH/TL08xH model (SLOM513A).\nStimulus: V1 = +5V (ideal); V2 + R102 = the TPS60400 -5V rail (-5 V behind ~15 ohm, SLVS324C 8.3.1);\nV3 + R100 = the pH electrode: an EMF behind 100 Mohm, on the BNC centre (J2 SIGNAL).\nRV1 is fixed at mid-travel (pos=0.5: 2.5k each side, gain 3.987, the nominal setting). The x200 copy (R201..U204, RV201) has RV201 at the R3 end (pos=0: gain 4.186, the maximum) and its own -5V (V4 + R103), so the two chains do not share the pump's droop; V5 floors its EMF at -0.5 V.\nFault circuit: V6 holds a copy of U4's output at -4.96 V (the -5V rail) into R107/D102, copies of R7/D2.\nU4_OUT reaches the Nano's A0 (PH_OUT, A1 pin 19) through R7 4.7k; D2 (BAT54, Nexperia model models/bat54.lib) clamps A0 to GND.\nChecks: expect.toml, run by check.py."
 		(exclude_from_sim yes)
 		(at 25.4 226.06 0)
 		(effects
