@@ -657,7 +657,191 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "Device:R"
+		(symbol "Diode:BAR42FILM"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(offset 1.016)
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "D"
+				(at 0 2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "BAR42FILM"
+				(at 0 -2.54 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+				(at 0 -4.445 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "www.st.com/resource/en/datasheet/bar42.pdf"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "30V 0.1A Small signal Schottky diode, SOT-23"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "diode Schottky"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "SOT?23*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "BAR42FILM_0_1"
+				(polyline
+					(pts
+						(xy -1.905 0.635) (xy -1.905 1.27) (xy -1.27 1.27) (xy -1.27 -1.27) (xy -0.635 -1.27) (xy -0.635 -0.635)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 1.27) (xy 1.27 -1.27) (xy -1.27 0) (xy 1.27 1.27)
+					)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 0) (xy -1.27 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "BAR42FILM_1_1"
+				(pin passive line
+					(at 3.81 0 180)
+					(length 2.54)
+					(name "A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 1.27 1.27 270)
+					(length 2.54)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -3.81 0 0)
+					(length 2.54)
+					(name "K"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)		(symbol "Device:R"
 			(pin_numbers
 				(hide yes)
 			)
@@ -1376,7 +1560,7 @@
 	)
 	(rectangle
 		(start 160.02 110.49)
-		(end 227.33 146.05)
+		(end 250.19 146.05)
 		(stroke
 			(width 0)
 			(type default)
@@ -1400,7 +1584,7 @@
 	)
 	(rectangle
 		(start 160.02 34.29)
-		(end 227.33 110.49)
+		(end 250.19 110.49)
 		(stroke
 			(width 0)
 			(type default)
@@ -1596,16 +1780,6 @@
 	)
 	(wire
 		(pts
-			(xy 222.25 68.58) (xy 231.14 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "04311663-838e-481d-987a-6b0a7d4143d1")
-	)
-	(wire
-		(pts
 			(xy 212.09 90.17) (xy 212.09 92.71)
 		)
 		(stroke
@@ -1656,7 +1830,7 @@
 	)
 	(wire
 		(pts
-			(xy 229.87 134.62) (xy 217.17 134.62)
+			(xy 252.73 134.62) (xy 217.17 134.62)
 		)
 		(stroke
 			(width 0)
@@ -1936,7 +2110,7 @@
 	)
 	(wire
 		(pts
-			(xy 229.87 120.65) (xy 217.17 120.65)
+			(xy 252.73 120.65) (xy 217.17 120.65)
 		)
 		(stroke
 			(width 0)
@@ -2676,7 +2850,7 @@
 	)
 	(hierarchical_label "ANALOG_OUT"
 		(shape input)
-		(at 231.14 68.58 0)
+		(at 252.73 68.58 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2687,7 +2861,7 @@
 	)
 	(hierarchical_label "GND"
 		(shape input)
-		(at 229.87 134.62 0)
+		(at 252.73 134.62 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2698,7 +2872,7 @@
 	)
 	(hierarchical_label "+5V"
 		(shape input)
-		(at 229.87 120.65 0)
+		(at 252.73 120.65 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -2706,6 +2880,245 @@
 			(justify left)
 		)
 		(uuid "b1209b0c-b1ad-4e70-8ef9-c962cb92652d")
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 237.49 68.58 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f70b9c1e-930c-4e4a-8c88-d3de1652488e")
+		(property "Reference" "R7"
+			(at 237.49 63.5 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "4.7k"
+			(at 237.49 66.04 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0805_2012Metric_Pad1.20x1.40mm_HandSolder"
+			(at 237.49 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 237.49 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 237.49 68.58 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "1ef12b30-7882-45dd-830b-052ce8d43b75")
+		)
+		(pin "2"
+			(uuid "4b257e05-518a-4357-8234-9fde51cc96cf")
+		)
+		(instances
+			(project "BREAD_Slice"
+				(path "/66043bca-a260-4915-9fce-8a51d324c687/59771702-e611-4415-bac4-1f9c41974f83"
+					(reference "R7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:BAR42FILM")
+		(at 245.11 73.66 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "7b1b61c3-2838-476e-9b41-1b9979dca8dd")
+		(property "Reference" "D2"
+			(at 247.65 72.39 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "BAT54"
+			(at 247.65 74.93 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-23"
+			(at 245.11 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 245.11 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Small-signal Schottky diode, SOT-23 (1 = A, 2 = NC, 3 = K)"
+			(at 245.11 73.66 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "204ad531-f2d0-4295-8f2c-279becd45e39")
+		)
+		(pin "2"
+			(uuid "3e486328-388e-4740-95be-9258ea43a7cb")
+		)
+		(pin "3"
+			(uuid "0cdba151-79f8-45e1-b185-b0cf5c5ec8ad")
+		)
+		(instances
+			(project "BREAD_Slice"
+				(path "/66043bca-a260-4915-9fce-8a51d324c687/59771702-e611-4415-bac4-1f9c41974f83"
+					(reference "D2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(wire
+		(pts
+			(xy 222.25 68.58) (xy 233.68 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f11c9f92-1a47-498f-81b1-d228c227354d")
+	)
+	(wire
+		(pts
+			(xy 241.3 68.58) (xy 245.11 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d96c5693-708d-4f08-821e-7c1a898eb166")
+	)
+	(wire
+		(pts
+			(xy 245.11 68.58) (xy 252.73 68.58)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db62764a-e0d1-4ecd-a09c-222d138850c6")
+	)
+	(wire
+		(pts
+			(xy 245.11 68.58) (xy 245.11 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49a9d9e3-0bac-4759-88f3-4aa4af15648b")
+	)
+	(wire
+		(pts
+			(xy 245.11 77.47) (xy 245.11 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a26cb62b-4a14-427d-96ec-a0b5074b58a4")
+	)
+	(junction
+		(at 245.11 68.58)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "c0d7a36b-cc5e-48cb-b84d-0a517352e30c")
+	)
+	(label "GND"
+		(at 245.11 80.01 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fe1d5e3c-9246-43c8-9c9b-1bb4e6fd35d1")
+	)
+	(label "U4_OUT"
+		(at 223.52 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a388a7f6-8a3b-4233-93a2-cf00f13adcf4")
 	)
 	(symbol
 		(lib_id "Device:R")

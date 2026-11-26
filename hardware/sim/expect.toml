@@ -6,8 +6,11 @@
 #   Rtop = 2.2k + 5k (1 - pos), Rbot = 1k + 5k pos, G = 1 + Rtop/Rbot = 8.2k / Rbot,
 # so RV1 sets the gain (1.367 .. 8.2), not the offset. Mid-travel: Rtop = 4.7k, Rbot = 3.5k,
 # G = 2.3429. U4 (TL081H) is an inverting summer, + input at GND:
-#   PH_OUT = -(R6/R4) U2_OUT - (R6/R5) V(-5V) = 0.4 |V(-5V)| - U2_OUT,
-# straight to the Nano's A0 (A1 pin 19).
+#   U4_OUT = -(R6/R4) U2_OUT - (R6/R5) V(-5V) = 0.4 |V(-5V)| - U2_OUT,
+# to the Nano's A0 (PH_OUT, A1 pin 19) through R7 4.7k, with D2 (BAT54) from A0 to GND.
+# PH_OUT = U4_OUT less R7 times D2's reverse leakage. D2 is the Nexperia BAT54 model
+# (models/bat54.lib: IS = 2.117e-7, N = 1, RS = 2.7, beside 18 Mohm), so the leakage is
+# VR / 18M + IS: 4.7k (1.9868 / 18M + 0.2117 uA) = 1.51 mV at pH 7, 1.26 .. 1.80 mV over the span.
 #
 # -5V: the TPS60400 is unregulated, -(5 V - Ro I) with Ro ~ 15 ohm (SLVS324C 8.3.1). The load is
 # U4's model supply current 0.9375 mA + U2's 1.6 mA + R5's 5 V / 75k = 2.604 mA, so
@@ -15,9 +18,16 @@
 #
 # The probe is V3 behind R100 = 100 Mohm. U2's input current (10 pA, datasheet typ) drops
 # 10 pA * (100M + 4.7M) = 1.047 mV, so U2 sees Vph - 1.047 mV:
-#   PH_OUT = 1.9844 + 2.3429 * 1.047 mV - 2.3429 Vph = 1.9868 - 2.3429 Vph.
-# pH 0..14 at 25 C is +414.1 .. -414.1 mV (59.16 mV/pH), so A0 reads 1.017 V (pH 0) to
-# 2.957 V (pH 14): 1.940 V, 397 counts of the 10-bit 0-5 V ADC, 28.4 counts/pH.
+#   U4_OUT = 1.9844 + 2.3429 * 1.047 mV - 2.3429 Vph = 1.9868 - 2.3429 Vph.
+# pH 0..14 at 25 C is +414.1 .. -414.1 mV (59.16 mV/pH), so A0 reads 1.015 V (pH 0) to
+# 2.955 V (pH 14): 1.940 V, 397 counts of the 10-bit 0-5 V ADC, 28.4 counts/pH.
+#
+# Clamp: with U4's output at V, I = (|V| - Vd) / 4.7k and Vd = Vt ln(I / IS + 1) + I RS
+# (Vt = 25.865 mV at 27 C). At the -5V rail (V = -4.96 V, U4 saturated low): I = 1.008 mA,
+# A0 = -0.2218 V; the data sheet's VF is at most 320 mV at 1 mA (BAT54, 1 July 2022, Table 7),
+# so A0 stays above about -0.33 V on any part, inside the ATmega328P's -0.5 V pin limit, and
+# D2 carries 1 mA of its 200 mA rating. 4.7k plus U4's output is under the 10 kohm source
+# impedance the ATmega328P ADC is specified for.
 #
 # Absolute DC points carry the real parts' offset budget before calibration, as rtol:
 # U4 VOS 4 mV max x noise gain 2.4 = 9.6 mV; U2 VIO 15 mV max x 2.3429 = 35.1 mV; U2 input
@@ -34,50 +44,51 @@
 # Its EMF comes through V5 = max(EMF, -0.2 V): below that its U4 would saturate high and the
 # TL08xH model stops converging in the DC sweep. Above -0.2 V it follows the EMF exactly.
 
-mirrors = ["R1", "R2", "R3", "R4", "R5", "R6", "C5", "C6", "RV1", "U2", "U4",
-           "R201=R1", "R202=R2", "R203=R3", "R204=R4", "R205=R5", "R206=R6",
-           "C205=C5", "C206=C6", "RV201=RV1", "U202=U2", "U204=U4"]
+mirrors = ["R1", "R2", "R3", "R4", "R5", "R6", "R7", "C5", "C6", "RV1", "D2", "U2", "U4",
+           "R201=R1", "R202=R2", "R203=R3", "R204=R4", "R205=R5", "R206=R6", "R207=R7",
+           "C205=C5", "C206=C6", "RV201=RV1", "D202=D2", "U202=U2", "U204=U4",
+           "R107=R7", "D102=D2"]
 
 # DC: V3 (probe EMF) swept -0.6 .. +0.6 V.
 
-# pH 7 (0 mV): 1.9868 V; rtol 0.057 / 1.9868
+# pH 7 (0 mV): 1.9868 V at U4, 1.9853 V at A0 after D2's 1.51 mV; rtol 0.057 / 1.9853
 [[measure]]
 name = "a0_ph7"
 analysis = "dc"
 meas = "find v(/ph_out) at=0"
-expect = 1.9868
+expect = 1.9853
 rtol = 0.029
 
-# pH 0 (+414.1 mV): 1.9868 - 2.3429 * 0.41412 = 1.0166 V; rtol 0.057 / 1.0166
+# pH 0 (+414.1 mV): 1.9868 - 2.3429 * 0.41412 = 1.0166 V, 1.0154 V at A0; rtol 0.057 / 1.0154
 [[measure]]
 name = "a0_ph0"
 analysis = "dc"
 meas = "find v(/ph_out) at=0.41412"
-expect = 1.0166
+expect = 1.0154
 rtol = 0.057
 
-# pH 4 (+177.5 mV): 1.5710 V; rtol 0.057 / 1.5710
+# pH 4 (+177.5 mV): 1.5710 V, 1.5696 V at A0; rtol 0.057 / 1.5696
 [[measure]]
 name = "a0_ph4"
 analysis = "dc"
 meas = "find v(/ph_out) at=0.17748"
-expect = 1.5710
+expect = 1.5696
 rtol = 0.037
 
-# pH 10 (-177.5 mV): 2.4026 V; rtol 0.057 / 2.4026
+# pH 10 (-177.5 mV): 2.4026 V, 2.4010 V at A0; rtol 0.057 / 2.4010
 [[measure]]
 name = "a0_ph10"
 analysis = "dc"
 meas = "find v(/ph_out) at=-0.17748"
-expect = 2.4026
+expect = 2.4010
 rtol = 0.024
 
-# pH 14 (-414.1 mV): 2.9571 V; rtol 0.057 / 2.9571
+# pH 14 (-414.1 mV): 2.9571 V, 2.9553 V at A0; rtol 0.057 / 2.9553
 [[measure]]
 name = "a0_ph14"
 analysis = "dc"
 meas = "find v(/ph_out) at=-0.41412"
-expect = 2.9571
+expect = 2.9553
 rtol = 0.02
 
 # U2 input at 0 V EMF: -10 pA * 104.7 Mohm = -1.047 mV (the stand-in's input current)
@@ -102,7 +113,7 @@ name = "u4_vn"
 analysis = "dc"
 meas = "find v(/u4_n) at=0"
 
-# Informational: pH 0 and pH 14 at 60 C (66.10 mV/pH, +/-462.7 mV): by hand 0.903 V and 3.071 V
+# Informational: pH 0 and pH 14 at 60 C (66.10 mV/pH, +/-462.7 mV): by hand 0.902 V and 3.069 V
 [[measure]]
 name = "a0_ph0_60c"
 analysis = "dc"
@@ -114,7 +125,7 @@ analysis = "dc"
 meas = "find v(/ph_out) at=-0.46273"
 
 # Maximum gain: A0 crosses 0 V at Vph = 1.9844 / 8.2 + 1.047 mV = 243.0 mV (pH 2.89);
-# below pH 2.89, A0 goes negative. rtol covers the model's 22 mV offset (/8.2 = 2.7 mV, 1.1%).
+# below pH 2.89, U4_OUT goes negative and D2 holds A0 at no less than about -0.2 V. rtol covers the model's 22 mV offset (/8.2 = 2.7 mV, 1.1%).
 [[measure]]
 name = "a0_zero_emf_max"
 analysis = "dc"
@@ -129,12 +140,31 @@ name = "u2_ceiling_max"
 analysis = "dc"
 meas = "max v(/u2_out_200)"
 
-# Informational: A0 with U2 at its ceiling (max gain, +600 mV): 1.9844 - 3.0 = about -1.0 V.
-# The same happens at any gain with the probe unplugged if U2 drifts to its positive limit.
+# A0 with U2 at its ceiling (max gain, +600 mV), as with the probe unplugged once U2's input
+# drifts high: U4_OUT = 1.9844 - 3.029 (the stand-in's ceiling) - 22 mV (the TL08xH model's
+# offset) = -1.067 V, which R7 and D2 clamp: I = 0.190 mA, A0 = -0.1763 V (was -1.067 V).
 [[measure]]
 name = "a0_u2_ceiling"
 analysis = "dc"
 meas = "find v(/ph_out_200) at=0.6"
+expect = -0.1763
+rtol = 0.03
+
+# Fault: A0 with U4's output held at the -5V rail (V6 = -4.96 V into R107, D102): -0.2218 V
+[[measure]]
+name = "fault_a0"
+analysis = "dc"
+meas = "find v(/a0_fault) at=0"
+expect = -0.2218
+rtol = 0.02
+
+# Fault: clamp current through R107 and D102 into V6's + terminal: 1.008 mA
+[[measure]]
+name = "fault_clamp_current"
+analysis = "dc"
+meas = "find i(v6) at=0"
+expect = 1.0081e-3
+rtol = 0.01
 
 # TRAN: V3 steps 0 -> 0.1 V at 0.1 s. Input time constant tau = (R100 + R1) C5 = 230.3 ms.
 
