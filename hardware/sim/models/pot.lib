@@ -1,0 +1,6 @@
+* Trimmer as two resistors (written for this bench). Pins 1 and 3 are the ends, 2 the wiper.
+* pos is the wiper's place from pin 3 (0) to pin 1 (1): R(1-2) = r (1 - pos), R(2-3) = r pos.
+.SUBCKT POT 1 2 3 r=5k pos=0.5
+R12 1 2 {max(r*(1-pos), 1m)}
+R23 2 3 {max(r*pos, 1m)}
+.ENDS
