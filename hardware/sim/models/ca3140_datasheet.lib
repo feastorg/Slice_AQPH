@@ -1,0 +1,34 @@
+* CA3140 DATASHEET STAND-IN -- NOT A VENDOR MODEL.
+* No SPICE model for the CA3140 is listed on the Renesas product page
+* (https://www.renesas.com/en/products/ca3140, fetched 2026-11-25). This subcircuit is built
+* from typical values in the Renesas datasheet FN957 Rev.10.01 (Feb 19, 2026), so the bench
+* can run until a vendor model replaces it (set U201/U202 Sim.Library and Sim.Name).
+*
+* What it has (datasheet source):
+*   input current 10 pA out of each input (II typ at +/-15 V, p. 3; max 50 pA; 2 pA typ at 5 V)
+*   input resistance 1.5 Tohm (front page)
+*   open-loop gain 100 dB (AOL typ, p. 3), one pole at 37 Hz: GBW 3.7 MHz (fT at 5 V, p. 4)
+*   output limits V+ - 2.0 V and V- + 0.13 V (VOM+ 3 V, VOM- 0.13 V at V+ = 5 V, V- = 0, p. 4)
+*   supply current 1.6 mA (I+ at 5 V, p. 4)
+* What it does NOT have: input offset voltage (5 mV typ, 15 mV max) and its drift, input
+* current vs temperature (Fig. 7), the input common-mode limit (V- - 0.5 V to V+ - 2.4 V),
+* slew rate, output current limits, noise, the strobe and offset-null pins.
+* Pins: 1 IN+, 2 IN-, 3 V+, 4 V-, 5 OUT.
+.SUBCKT CA3140_DS 1 2 3 4 5
+RIN 1 2 1.5T
+IB1 1 0 DC 10p
+IB2 2 0 DC 10p
+IQ 3 4 DC 1.6m
+* Gain stage: 1 mS into 100 Mohm = 100 dB; 42.85 pF puts its pole at 37 Hz (GBW 3.7 MHz).
+G1 0 7 1 2 1m
+R1 7 0 100MEG
+C1 7 0 42.85p
+* Output limits: diodes clamp node 7 at V+ - 2.0 V and V- + 0.13 V.
+VH 3 9 DC 2.0
+VL 10 4 DC 0.13
+DH 7 9 DCLAMP
+DL 10 7 DCLAMP
+EO 8 0 7 0 1
+RO 8 5 10
+.MODEL DCLAMP D(IS=1E-15 N=0.05)
+.ENDS
