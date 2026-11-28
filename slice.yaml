@@ -4,7 +4,7 @@ id: slice-aqph
 name: Aqua pH Sensor
 summary: pH measurement slice with high-impedance analog amplifier front-end.
 category: sensing
-status: concept
+status: development
 hardware:
   hw_gen_current: 3
   interface: SI1
